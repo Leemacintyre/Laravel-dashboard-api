@@ -26,6 +26,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|OrderItem whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OrderItem whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $product_title
+ * @method static \Database\Factories\OrderItemFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItem whereProductTitle($value)
  */
 class OrderItem extends Model
 {
