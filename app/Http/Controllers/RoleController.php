@@ -18,7 +18,9 @@ class RoleController extends Controller
     {
         $role = Role::create($request->only('name'));
 
-        return response(new RoleResource($role) , Response::HTTP_CREATED);
+        $role->permissions()->attach($request->input('permissions'));
+
+        return response(new RoleResource($role->load('permissions')) , Response::HTTP_CREATED);
     }
 
     public function show($id)
@@ -29,9 +31,12 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $role = Role::find($id);
+
         $role->update($request->only('name'));
 
-        return response(new RoleResource($role), Response::HTTP_ACCEPTED);
+        $role->permissions()->sync($request->input('permissions'));
+
+        return response(new RoleResource($role->load('permissions')), Response::HTTP_ACCEPTED);
     }
 
     public function destroy($id)
