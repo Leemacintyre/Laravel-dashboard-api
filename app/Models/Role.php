@@ -18,7 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Permission[] $permissions
  * @property-read int|null $permissions_count
- * @method static \Database\Factories\RoleFactory factory(...$parameters)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
+ * @property-read int|null $users_count
  */
 class Role extends Model
 {
@@ -30,11 +31,11 @@ class Role extends Model
 
     public function users()
     {
-        $this->hasMany(User::class);
+        return $this->hasMany(User::class);
     }
 
     public function permissions()
     {
-        return $this->belongsToMany(Permission::class,'role_Permissions');
+        return $this->belongsToMany(Permission::class, 'role_permissions');
     }
 }

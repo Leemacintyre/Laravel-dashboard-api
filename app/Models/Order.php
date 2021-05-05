@@ -28,7 +28,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read mixed $total
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\OrderItem[] $orderItems
  * @property-read int|null $order_items_count
- * @method static \Database\Factories\OrderFactory factory(...$parameters)
  */
 class Order extends Model
 {
@@ -41,12 +40,11 @@ class Order extends Model
 
     public function getNameAttribute()
     {
-        return $this->first_name . " " . $this->last_name;
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     public function getTotalAttribute()
     {
         return $this->orderItems->sum(fn(OrderItem $orderItem) => $orderItem->quantity * $orderItem->price);
     }
-
 }

@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
-    public function register(RegisterRequest $request): string
+    public function register(RegisterRequest $request)
     {
         $user = User::create([
             'first_name' => $request->input('first_name'),
@@ -23,6 +23,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->input('password')),
             'role_id' => 1
         ]);
+
         return response(new UserResource($user), Response::HTTP_CREATED);
     }
 
@@ -49,12 +50,14 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         $user = $request->user();
+
         return new UserResource($user->load('role'));
     }
 
     public function logout()
     {
         $cookie = \Cookie::forget('jwt');
+
         return \response([
             'message' => 'success'
         ])->withCookie($cookie);

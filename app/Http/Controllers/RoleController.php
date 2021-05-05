@@ -20,12 +20,12 @@ class RoleController extends Controller
 
         $role->permissions()->attach($request->input('permissions'));
 
-        return response(new RoleResource($role->load('permissions')) , Response::HTTP_CREATED);
+        return response(new RoleResource($role->load('permissions')), Response::HTTP_CREATED);
     }
 
     public function show($id)
     {
-        return new RoleResource(Role::with('permissions')->find($id)) ;
+        return new RoleResource(Role::with('permissions')->find($id));
     }
 
     public function update(Request $request, $id)
@@ -45,5 +45,4 @@ class RoleController extends Controller
 
         return \response(null, Response::HTTP_NO_CONTENT);
     }
-
 }

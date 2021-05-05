@@ -9,7 +9,7 @@ class OrderResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
@@ -19,7 +19,7 @@ class OrderResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'total' => $this->total,
-            'order_items' => OrderItemResource::collection($this->whenLoaded('orderItems')),
+            'order_items' => OrderItemResource::collection($this->whenLoaded('orderItems'))
         ];
     }
 }
